@@ -3,32 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/remindersFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="hu.okki.pilldroid.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        android:id="@+id/remindersFragment"
+        android:name="hu.okki.pilldroid.screens.reminders.RemindersFragment"
+        android:label="@string/title_reminders"
+        tools:layout="@layout/reminders_fragment" />
 
-        <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/SecondFragment"
-        android:name="hu.okki.pilldroid.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
-    </fragment>
     <fragment
         android:id="@+id/aboutFragment"
-        android:name="hu.okki.pilldroid.AboutFragment"
-        android:label="About"
+        android:name="hu.okki.pilldroid.screens.about.AboutFragment"
+        android:label="@string/title_about"
         tools:layout="@layout/fragment_about" />
+
 </navigation>
