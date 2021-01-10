@@ -1,6 +1,9 @@
 package hu.okki.pilldroid.model
 
+import java.util.*
+
 data class Medication(
-    private val name: String,
-    private val dosages: List<Dosage>
+    val id: UUID,
+    val name: String,
+    val dosages: List<Dosage>
 )

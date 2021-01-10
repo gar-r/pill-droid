@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".screens.reminders.RemindersFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".screens.medlist.MedListFragment">
 
     <data>
         <variable
-            name="remindersViewModel"
-            type="hu.okki.pilldroid.screens.reminders.RemindersViewModel" />
+            name="viewModel"
+            type="hu.okki.pilldroid.screens.medlist.MedListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/reminder_text"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/med_list_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@{remindersViewModel.text}" />
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

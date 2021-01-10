@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="medication"
+            type="hu.okki.pilldroid.model.Medication" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
+        tools:context=".screens.medlist.MedListItemFragment">
+
+        <TextView
+            android:id="@+id/medication_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:medicationName="@{medication}"
+            tools:text="Medication Name" />
+
+
+        <TextView
+            android:id="@+id/dose_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Dose: "
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/medication_name" />
+
+        <TextView
+            android:id="@+id/dose_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/dose_label"
+            app:layout_constraintTop_toTopOf="@+id/dose_label"
+            app:doseValue="@{medication}"
+            tools:text="3" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

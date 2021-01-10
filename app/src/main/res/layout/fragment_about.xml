@@ -4,11 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".screens.about.AboutFragment"
-    android:id="@+id/about_layout" >
+    tools:context=".screens.about.AboutFragment">
 
     <TextView
-        android:id="@+id/about_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
@@ -16,14 +14,12 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <TextView
-        android:id="@+id/about_author"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:text="@string/misc_created_by" />
 
     <TextView
-        android:id="@+id/about_contact"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
@@ -31,7 +27,6 @@
         android:text="@string/misc_contact_email" />
 
     <TextView
-        android:id="@+id/about_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="TODO"

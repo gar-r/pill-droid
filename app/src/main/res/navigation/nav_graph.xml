@@ -2,19 +2,17 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
-    app:startDestination="@id/remindersFragment">
-
-    <fragment
-        android:id="@+id/remindersFragment"
-        android:name="hu.okki.pilldroid.screens.reminders.RemindersFragment"
-        android:label="@string/title_reminders"
-        tools:layout="@layout/reminders_fragment" />
+    app:startDestination="@id/medListFragment">
 
     <fragment
         android:id="@+id/aboutFragment"
         android:name="hu.okki.pilldroid.screens.about.AboutFragment"
         android:label="@string/title_about"
         tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/medListFragment"
+        android:name="hu.okki.pilldroid.screens.medlist.MedListFragment"
+        android:label="@string/title_medication_list"
+        tools:layout="@layout/fragment_med_list" />
 
 </navigation>
