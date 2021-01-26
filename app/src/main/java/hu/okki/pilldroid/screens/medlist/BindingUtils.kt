@@ -8,8 +8,3 @@ import hu.okki.pilldroid.model.Medication
 fun TextView.setMedicationName(item: Medication) {
     text = item.name
 }
-
-@BindingAdapter("doseValue")
-fun TextView.setDoseValue(item: Medication) {
-    text = item.dosages.size.toString()
-}

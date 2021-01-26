@@ -2,9 +2,12 @@ package hu.okki.pilldroid.screens.medlist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import hu.okki.pilldroid.R
 import hu.okki.pilldroid.databinding.FragmentMedListItemBinding
 import hu.okki.pilldroid.model.Medication
 
@@ -25,6 +28,10 @@ class MedItemRecyclerAdapter
         fun bind(item: Medication) {
             binding.medication = item
             binding.executePendingBindings()
+            itemView.setOnClickListener {
+                val action = MedListFragmentDirections.actionMedListFragmentToMedDetails(item)
+                itemView.findNavController().navigate(action)
+            }
         }
 
         companion object {

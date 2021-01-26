@@ -13,6 +13,19 @@
         android:id="@+id/medListFragment"
         android:name="hu.okki.pilldroid.screens.medlist.MedListFragment"
         android:label="@string/title_medication_list"
-        tools:layout="@layout/fragment_med_list" />
+        tools:layout="@layout/fragment_med_list" >
+        <action
+            android:id="@+id/action_medListFragment_to_medDetails"
+            app:destination="@id/medDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/medDetailsFragment"
+        android:name="hu.okki.pilldroid.screens.meddetails.MedDetailsFragment"
+        android:label="@string/title_med_details"
+        tools:layout="@layout/fragment_med_details" >
+        <argument
+            android:name="medication"
+            app:argType="hu.okki.pilldroid.model.Medication" />
+    </fragment>
 
 </navigation>
