@@ -6,14 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.EditText
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import hu.okki.pilldroid.R
 import hu.okki.pilldroid.databinding.FragmentMedDetailsBinding
-import hu.okki.pilldroid.model.Medication
 
 class MedDetailsFragment : Fragment() {
 
@@ -30,10 +30,11 @@ class MedDetailsFragment : Fragment() {
             container,
             false)
         viewModel = ViewModelProvider(this).get(MedDetailsViewModel::class.java)
-        viewModel.medication = MutableLiveData(args.medication)
+        viewModel.medication = args.medication
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
+
 
 }

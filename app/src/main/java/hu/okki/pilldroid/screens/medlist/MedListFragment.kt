@@ -1,16 +1,15 @@
 package hu.okki.pilldroid.screens.medlist
 
-import android.app.AlertDialog
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import hu.okki.pilldroid.R
 import hu.okki.pilldroid.databinding.FragmentMedListBinding
 
@@ -28,11 +27,25 @@ class MedListFragment : Fragment() {
             inflater, R.layout.fragment_med_list, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-        val recycler = binding.root.findViewById<RecyclerView>(R.id.med_list_recycler_view)
+        bindList(binding.root)
+        bindNewButton(binding.root)
+        return binding.root
+    }
+
+    private fun bindList(v: View) {
+        val recycler = v.findViewById<RecyclerView>(R.id.med_list_recycler_view)
         medItemRecyclerAdapter = MedItemRecyclerAdapter()
         medItemRecyclerAdapter.submitList(viewModel.medList)
         recycler.adapter = medItemRecyclerAdapter
-        return binding.root
+    }
+
+    private fun bindNewButton(v: View) {
+        val newButton = v.findViewById<FloatingActionButton>(R.id.newMedicationButton)
+        newButton.setOnClickListener {
+            val medication = viewModel.addMedication()
+            val action = MedListFragmentDirections.actionMedListFragmentToMedDetails(medication)
+            findNavController().navigate(action)
+        }
     }
 
 }

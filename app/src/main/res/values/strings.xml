@@ -9,4 +9,6 @@
     <string name="reminders_label">Active Reminders:</string>
     <string name="add_new">Add New</string>
     <string name="title_med_details">Edit Medication</string>
+    <string name="medication_name">medication name</string>
+    <string name="add_dosage">add dosage</string>
 </resources>

@@ -5,6 +5,14 @@ import java.util.*
 
 data class Medication(
     val id: UUID,
-    val name: String,
+    var name: String,
     val dosages: List<Dosage>
-) : Serializable
+) : Serializable {
+
+    constructor(name: String) : this(
+        UUID.randomUUID(),
+        name,
+        mutableListOf()
+    )
+
+}
