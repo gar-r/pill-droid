@@ -7,8 +7,4 @@ class MedDetailsViewModel : ViewModel() {
 
     lateinit var medication: Medication
 
-    fun save(name: String) {
-        medication.name = name
-    }
-
 }

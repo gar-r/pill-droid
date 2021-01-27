@@ -11,13 +11,17 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import hu.okki.pilldroid.R
 import hu.okki.pilldroid.databinding.FragmentMedDetailsBinding
+import hu.okki.pilldroid.screens.doselist.DoseItemRecyclerAdapter
 
 class MedDetailsFragment : Fragment() {
 
     private lateinit var viewModel: MedDetailsViewModel
+    private lateinit var doseItemRecyclerAdapter: DoseItemRecyclerAdapter
+
     private val args: MedDetailsFragmentArgs by navArgs()
 
     override fun onCreateView(
@@ -33,7 +37,15 @@ class MedDetailsFragment : Fragment() {
         viewModel.medication = args.medication
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        bindList(binding.root)
         return binding.root
+    }
+
+    private fun bindList(v: View) {
+        val recycler = v.findViewById<RecyclerView>(R.id.dose_list_recycler_view)
+        doseItemRecyclerAdapter = DoseItemRecyclerAdapter()
+        doseItemRecyclerAdapter.submitList(viewModel.medication.dosages)
+        recycler.adapter = doseItemRecyclerAdapter
     }
 
 
