@@ -1,15 +1,14 @@
 package hu.okki.pilldroid
 
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
+import hu.okki.pilldroid.data.loadMedList
+import hu.okki.pilldroid.data.saveMedList
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,6 +18,16 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
         val navController = findNavController(R.id.nav_host_fragment)
         setupActionBarWithNavController(navController, AppBarConfiguration(navController.graph))
+    }
+
+    override fun onResume() {
+        super.onResume()
+        loadMedList(applicationContext.filesDir)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        saveMedList(applicationContext.filesDir)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

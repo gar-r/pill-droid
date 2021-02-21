@@ -1,12 +1,11 @@
 package hu.okki.pilldroid.screens.medlist
 
 import androidx.lifecycle.ViewModel
-import hu.okki.pilldroid.dummy.dummyMedList
 import hu.okki.pilldroid.model.Medication
 
 class MedListViewModel : ViewModel() {
 
-    val medList = dummyMedList
+    val medList = hu.okki.pilldroid.data.medList
 
     fun addMedication(): Medication {
         val medication = Medication("New Medication")

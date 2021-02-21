@@ -2,6 +2,7 @@ package hu.okki.pilldroid.model
 
 import java.io.Serializable
 
+@kotlinx.serialization.Serializable
 data class Dosage(
     var frequency: Int,
     var hour: Int,
