@@ -45,7 +45,7 @@ class MedItemRecyclerAdapter
     class MedicationDiffCallback : DiffUtil.ItemCallback<Medication>() {
 
         override fun areItemsTheSame(oldItem: Medication, newItem: Medication): Boolean {
-            return oldItem.id == newItem.id
+            return oldItem.name == newItem.name
         }
 
         override fun areContentsTheSame(oldItem: Medication, newItem: Medication): Boolean {

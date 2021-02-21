@@ -4,7 +4,7 @@ import java.io.Serializable
 
 @kotlinx.serialization.Serializable
 data class Dosage(
-    var frequency: Int,
+    var frequency: String,
     var hour: Int,
     var minute: Int,
     var amount: String

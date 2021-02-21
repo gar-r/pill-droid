@@ -4,19 +4,14 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import hu.okki.pilldroid.model.Dosage
 
-@BindingAdapter("doseFrequency")
-fun TextView.setDoseFrequency(item: Dosage) {
-    text = item.frequency.toString()
-}
-
 @BindingAdapter("dosePretty")
 fun TextView.setDosePretty(item: Dosage) {
     text = "${item.amount} at ${formatTime(item.hour)}:${formatTime(item.minute)}, ${formatFreq(item.frequency)}"
 }
 
-private fun formatFreq(freq: Int): String {
+private fun formatFreq(freq: String): String {
     return when {
-        freq == 1 -> "every day"
+        freq == "1" -> "every day"
         else -> "every ${freq} days"
     }
 }

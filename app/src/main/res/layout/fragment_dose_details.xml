@@ -22,7 +22,7 @@
             android:autofillHints=""
             android:hint="@string/enter_dose"
             android:inputType="text"
-            android:text="@{viewModel.dose.amount}"
+            android:text="@={viewModel.dose.amount}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/select_number"
                 android:autofillHints=""
-                doseFrequency="@{viewModel.dose}"
+                android:text="@={viewModel.dose.frequency}"
                 android:inputType="number" />
 
             <TextView

@@ -10,6 +10,7 @@ import android.widget.EditText
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -38,6 +39,7 @@ class MedDetailsFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         bindList(binding.root)
+        bindAddButton(binding.root)
         return binding.root
     }
 
@@ -46,6 +48,15 @@ class MedDetailsFragment : Fragment() {
         doseItemRecyclerAdapter = DoseItemRecyclerAdapter()
         doseItemRecyclerAdapter.submitList(viewModel.medication.dosages)
         recycler.adapter = doseItemRecyclerAdapter
+    }
+
+    private fun bindAddButton(view: View) {
+        val button = view.findViewById<FloatingActionButton>(R.id.addDosageButton)
+        button.setOnClickListener {
+            val dosage = viewModel.addDosage()
+            val action = MedDetailsFragmentDirections.actionMedDetailsFragmentToDoseDetailsFragment(dosage)
+            findNavController().navigate(action)
+        }
     }
 
 
