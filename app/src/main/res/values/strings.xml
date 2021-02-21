@@ -11,4 +11,5 @@
     <string name="title_med_details">Edit Medication</string>
     <string name="medication_name">medication name</string>
     <string name="add_dosage">add dosage</string>
+    <string name="title_edit_dose">Edit Dose</string>
 </resources>

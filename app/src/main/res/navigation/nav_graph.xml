@@ -26,6 +26,17 @@
         <argument
             android:name="medication"
             app:argType="hu.okki.pilldroid.model.Medication" />
+        <action
+            android:id="@+id/action_medDetailsFragment_to_doseDetailsFragment"
+            app:destination="@id/doseDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/doseDetailsFragment"
+        android:name="hu.okki.pilldroid.screens.dosedetails.DoseDetailsFragment"
+        android:label="@string/title_edit_dose" >
+        <argument
+            android:name="dose"
+            app:argType="hu.okki.pilldroid.model.Dosage" />
     </fragment>
 
 </navigation>

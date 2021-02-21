@@ -6,5 +6,5 @@ import hu.okki.pilldroid.model.Dosage
 
 @BindingAdapter("doseFrequency")
 fun TextView.setDoseFrequency(item: Dosage) {
-    text = item.frequency.toString()
+    text = item.toString()
 }
