@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -8,15 +9,63 @@
             type="hu.okki.pilldroid.screens.dosedetails.DoseDetailsViewModel" />
     </data>
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".screens.dosedetails.DoseDetailsFragment">
 
-        <TextView
+        <EditText
+            android:id="@+id/dose_value_editor"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@{viewModel.dose.toString()}" />
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:autofillHints=""
+            android:hint="@string/enter_dose"
+            android:inputType="text"
+            android:text="@{viewModel.dose.amount}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </FrameLayout>
+        <LinearLayout
+            android:id="@+id/frequency_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dose_value_editor">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:text="@string/every" />
+
+            <EditText
+                android:id="@+id/dose_frequency_editor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/select_number"
+                android:autofillHints=""
+                doseFrequency="@{viewModel.dose}"
+                android:inputType="number" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:text="@string/days" />
+
+        </LinearLayout>
+
+        <TimePicker
+            android:id="@+id/dose_time_editor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/frequency_layout"
+            android:timePickerMode="spinner" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

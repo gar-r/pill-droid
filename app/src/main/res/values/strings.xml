@@ -6,10 +6,13 @@
     <string name="misc_created_by">created by garric</string>
     <string name="misc_contact_email">pilldroid@okki.hu</string>
     <string name="title_medication_list">Medication List</string>
-    <string name="reminders_label">Active Reminders:</string>
     <string name="add_new">Add New</string>
     <string name="title_med_details">Edit Medication</string>
     <string name="medication_name">medication name</string>
     <string name="add_dosage">add dosage</string>
     <string name="title_edit_dose">Edit Dose</string>
+    <string name="enter_dose">enter dose</string>
+    <string name="every">every</string>
+    <string name="select_number">select number</string>
+    <string name="days">days</string>
 </resources>

@@ -1,4 +1,3 @@
 <resources>
     <dimen name="textbox_margin_large">50dp</dimen>
-    <dimen name="text_margin">16dp</dimen>
 </resources>
