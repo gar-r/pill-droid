@@ -25,14 +25,11 @@ fun loadMedList(filesDir: File) {
         return
     }
     val jsonStr = f.readText()
+    medList.clear()
     try {
         json.decodeFromString<List<Medication>>(jsonStr).forEach(medList::add)
     }
     catch(e: Exception) {
         Log.e("persistence", e.toString())
     }
-
-
-
-
 }

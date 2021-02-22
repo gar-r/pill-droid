@@ -7,8 +7,10 @@ import android.view.MenuItem
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
+import hu.okki.pilldroid.alarm.cancelAlarms
 import hu.okki.pilldroid.data.loadMedList
 import hu.okki.pilldroid.data.saveMedList
+import hu.okki.pilldroid.alarm.setAlarms
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,12 +24,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        loadMedList(applicationContext.filesDir)
+        loadMedList(filesDir)
+        cancelAlarms(this)
     }
 
     override fun onPause() {
         super.onPause()
-        saveMedList(applicationContext.filesDir)
+        saveMedList(filesDir)
+        setAlarms(this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
