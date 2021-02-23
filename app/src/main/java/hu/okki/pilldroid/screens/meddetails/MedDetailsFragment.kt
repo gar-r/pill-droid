@@ -1,20 +1,18 @@
 package hu.okki.pilldroid.screens.meddetails
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.EditText
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import hu.okki.pilldroid.R
+import hu.okki.pilldroid.data.medList
 import hu.okki.pilldroid.databinding.FragmentMedDetailsBinding
 import hu.okki.pilldroid.screens.doselist.DoseItemRecyclerAdapter
 
@@ -59,5 +57,29 @@ class MedDetailsFragment : Fragment() {
         }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_details, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        R.id.menu_delete -> {
+            val builder = AlertDialog.Builder(context)
+                .setMessage("\"${viewModel.medication.name}\" ${getString(R.string.will_be_deleted)}")
+                .setTitle(getString(R.string.please_confirm))
+                .setPositiveButton(getString(R.string.delete)) { _, _ ->
+                    viewModel.deleteMedication()
+                    findNavController().popBackStack()
+                }
+                .setNegativeButton(getString(R.string.cancel)) { _, _ -> run {} }
+            builder.create().show()
+            true
+        }
+        else -> super.onOptionsItemSelected(item)
+    }
 }

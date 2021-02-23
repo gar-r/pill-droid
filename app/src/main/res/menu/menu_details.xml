@@ -1,0 +1,13 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="hu.okki.pilldroid.MainActivity">
+
+    <item
+        android:id="@+id/menu_delete"
+        android:orderInCategory="10"
+        android:title="@string/delete"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/delete_24px" />
+
+</menu>

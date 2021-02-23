@@ -15,4 +15,9 @@
     <string name="every">every</string>
     <string name="select_number">select number</string>
     <string name="days">days</string>
+    <string name="delete_medication">delete medication</string>
+    <string name="delete">Delete</string>
+    <string name="please_confirm">Please confirm</string>
+    <string name="will_be_deleted">will be deleted</string>
+    <string name="cancel">Cancel</string>
 </resources>

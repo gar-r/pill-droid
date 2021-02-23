@@ -17,9 +17,14 @@
     <style name="Theme.PillDroid.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="actionOverflowButtonStyle">@style/ActionButtonOverflow</item>
     </style>
 
     <style name="Theme.PillDroid.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.PillDroid.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="ActionButtonOverflow" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="tint">@color/design_default_color_on_secondary</item>
+    </style>
 </resources>
