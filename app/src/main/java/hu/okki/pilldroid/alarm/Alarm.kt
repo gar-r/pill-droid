@@ -59,7 +59,7 @@ private fun getAlarmTime(dosage: Dosage): Long {
 
 private fun getIntent(context: Context, dosage: Dosage): Intent {
     val intent = Intent(context, AlarmReceiver::class.java)
-    intent.data = Uri.parse("pilldroid://${dosage.id}")
+    intent.data = Uri.parse("pilldroid://dosages/${dosage.id}")
     return intent
 }
 
