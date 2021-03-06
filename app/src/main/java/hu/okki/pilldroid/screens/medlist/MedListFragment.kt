@@ -13,6 +13,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import hu.okki.pilldroid.R
 import hu.okki.pilldroid.databinding.FragmentMedListBinding
 
+
 class MedListFragment : Fragment() {
 
     private lateinit var viewModel: MedListViewModel
@@ -24,7 +25,8 @@ class MedListFragment : Fragment() {
     ): View? {
         viewModel = ViewModelProvider(this).get(MedListViewModel::class.java)
         val binding = DataBindingUtil.inflate<FragmentMedListBinding>(
-            inflater, R.layout.fragment_med_list, container, false)
+            inflater, R.layout.fragment_med_list, container, false
+        )
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         bindList(binding.root)

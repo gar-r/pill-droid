@@ -1,16 +1,16 @@
 package hu.okki.pilldroid
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import hu.okki.pilldroid.alarm.cancelAlarms
+import hu.okki.pilldroid.alarm.setAlarms
 import hu.okki.pilldroid.data.loadMedList
 import hu.okki.pilldroid.data.saveMedList
-import hu.okki.pilldroid.alarm.setAlarms
 
 class MainActivity : AppCompatActivity() {
 
@@ -53,4 +53,5 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return findNavController(R.id.nav_host_fragment).navigateUp()
     }
+
 }

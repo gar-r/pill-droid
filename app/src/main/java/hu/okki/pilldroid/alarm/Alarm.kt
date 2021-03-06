@@ -51,7 +51,6 @@ private fun cancelAlarm(alarmManager: AlarmManager, context: Context, dosage: Do
 
 private fun getAlarmTime(dosage: Dosage): Long {
     val cal = Calendar.getInstance().apply {
-        timeInMillis = System.currentTimeMillis()
         set(Calendar.HOUR_OF_DAY, dosage.hour)
         set(Calendar.MINUTE, dosage.minute)
     }
