@@ -23,7 +23,7 @@ class DoseDetailsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding = DataBindingUtil.inflate<FragmentDoseDetailsBinding>(
             inflater,
             R.layout.fragment_dose_details,
@@ -61,15 +61,17 @@ class DoseDetailsFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.menu_delete -> {
-            val builder = AlertDialog.Builder(context)
-                .setMessage("\"${viewModel.dose.toPrettyString()}\" ${getString(R.string.will_be_deleted)}")
-                .setTitle(getString(R.string.please_confirm))
-                .setPositiveButton(getString(R.string.delete)) { _, _ ->
-                    viewModel.deleteDosage()
-                    findNavController().popBackStack()
-                }
-                .setNegativeButton(getString(R.string.cancel)) { _, _ -> run {} }
-            builder.create().show()
+            context?.let {
+                val builder = AlertDialog.Builder(it)
+                    .setMessage("\"${viewModel.dose.toPrettyString(it)}\" ${getString(R.string.will_be_deleted)}")
+                    .setTitle(getString(R.string.please_confirm))
+                    .setPositiveButton(getString(R.string.delete)) { _, _ ->
+                        viewModel.deleteDosage()
+                        findNavController().popBackStack()
+                    }
+                    .setNegativeButton(getString(R.string.cancel)) { _, _ -> run {} }
+                builder.create().show()
+            }
             true
         }
         else -> super.onOptionsItemSelected(item)

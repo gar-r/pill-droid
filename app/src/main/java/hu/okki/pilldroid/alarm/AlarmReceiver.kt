@@ -28,7 +28,7 @@ class AlarmReceiver : BroadcastReceiver() {
             val builder = NotificationCompat.Builder(it, NOTIFICATION_CHANNEL_ID).apply {
                 setContentTitle(context.getString(R.string.pill_reminder))
                 setContentText(getNotificationContent(context, dosageId))
-                setSmallIcon(R.drawable.add_24px)
+                setSmallIcon(R.drawable.pie_chart_outline_24px)
                 priority = PRIORITY_HIGH
             }
             val notificationService =

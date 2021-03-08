@@ -6,6 +6,6 @@ import hu.okki.pilldroid.model.Dosage
 
 @BindingAdapter("dosePretty")
 fun TextView.setDosePretty(item: Dosage) {
-    text = item.toPrettyString()
+    text = item.toPrettyString(context)
 }
 

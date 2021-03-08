@@ -1,5 +1,7 @@
 package hu.okki.pilldroid.model
 
+import android.content.Context
+import hu.okki.pilldroid.R
 import java.io.Serializable
 import java.util.*
 
@@ -20,14 +22,14 @@ data class Dosage(
         amount
     )
 
-    fun toPrettyString(): String {
-        return "$amount at ${formatTime(hour)}:${formatTime(minute)}, ${freqFormatted()}"
+    fun toPrettyString(context: Context): String {
+        return "$amount ${getString(context, R.string.at)} ${formatTime(hour)}:${formatTime(minute)}, ${freqFormatted(context)}"
     }
 
-    private fun freqFormatted(): String {
+    private fun freqFormatted(context: Context): String {
         return when (frequency) {
-            "1" -> "every day"
-            else -> "every $frequency days"
+            "1" -> "${getString(context, R.string.every)} ${getString(context, R.string.day)}"
+            else -> "${getString(context, R.string.every)} $frequency ${getString(context, R.string.days)}"
         }
     }
 
@@ -37,6 +39,9 @@ data class Dosage(
             else -> t.toString()
         }
     }
+
+    private fun getString(context: Context, id: Int) =
+        context.resources.getString(id)
 
 
 }
