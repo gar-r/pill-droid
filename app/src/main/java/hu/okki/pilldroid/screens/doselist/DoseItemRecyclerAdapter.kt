@@ -1,6 +1,5 @@
 package hu.okki.pilldroid.screens.doselist
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
@@ -9,7 +8,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import hu.okki.pilldroid.databinding.FragmentDoseListItemBinding
 import hu.okki.pilldroid.model.Dosage
-import hu.okki.pilldroid.screens.dosedetails.DoseDetailsFragment
 import hu.okki.pilldroid.screens.meddetails.MedDetailsFragmentDirections
 
 class DoseItemRecyclerAdapter
@@ -30,7 +28,7 @@ class DoseItemRecyclerAdapter
             binding.dosage = item
             binding.executePendingBindings()
             itemView.setOnClickListener {
-                val action = MedDetailsFragmentDirections.actionMedDetailsFragmentToDoseDetailsFragment(item)
+                val action = MedDetailsFragmentDirections.actionMedDetailsFragmentToDoseDetailsFragment(item.id)
                 itemView.findNavController().navigate(action)
             }
         }

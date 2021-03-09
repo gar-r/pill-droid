@@ -6,7 +6,17 @@ import java.util.NoSuchElementException
 
 var medList = mutableListOf<Medication>()
 
-fun getMedDataByDoseId(id: String): Pair<Medication, Dosage> {
+var medListOld = mutableListOf<Medication>()
+
+fun getMedById(id: String): Medication {
+    return medList.single { med -> med.id == id }
+}
+
+fun getDoseById(id: String): Dosage {
+    return medList.flatMap { med -> med.dosages }.single { d -> d.id == id }
+}
+
+fun getMedDataByDoseId(id: String): Pair<Medication, Dosage>? {
     medList.forEach { med ->
         med.dosages.forEach { dose ->
             if (dose.id == id) {
@@ -14,5 +24,5 @@ fun getMedDataByDoseId(id: String): Pair<Medication, Dosage> {
             }
         }
     }
-    throw NoSuchElementException()
+    return null
 }

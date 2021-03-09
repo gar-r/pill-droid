@@ -11,28 +11,52 @@ import android.content.Intent
 import android.net.Uri
 import android.util.Log
 import hu.okki.pilldroid.data.medList
+import hu.okki.pilldroid.data.medListOld
 import hu.okki.pilldroid.model.Dosage
+import hu.okki.pilldroid.model.Medication
 import java.lang.Integer.parseInt
 import java.util.*
+import java.util.concurrent.ThreadPoolExecutor
 
-fun setAlarms(context: Context) {
+fun updateAlarms(context: Context) {
     val alarmManager = context.getSystemService(ALARM_SERVICE) as AlarmManager
-    forEachDose { d ->
-        setAlarm(alarmManager, context, d)
+
+    val dosages = medList.flatMap { med -> med.dosages }
+    val oldDosages = medListOld.flatMap { med -> med.dosages }
+
+    Log.d("Alarm", "current: $dosages")
+    Log.d("Alarm", "old: $oldDosages")
+
+    dosages.forEach { current ->
+        val old = findById(oldDosages, current)
+        if (old == null) {
+            setAlarm(alarmManager, context, current)
+        } else if (needsUpdate(current, old)) {
+            cancelAlarm(alarmManager, context, old)
+            setAlarm(alarmManager, context, current)
+        }
+    }
+
+    oldDosages.forEach { old ->
+        val current = findById(dosages, old)
+        if (current == null) {
+            cancelAlarm(alarmManager, context, old)
+        }
     }
 }
 
-fun cancelAlarms(context: Context) {
-    val alarmManager = context.getSystemService(ALARM_SERVICE) as AlarmManager
-    forEachDose { d ->
-        cancelAlarm(alarmManager, context, d)
-    }
+private fun findById(list: List<Dosage>, dosage: Dosage): Dosage? {
+    return list.firstOrNull { d -> dosage.id == d.id }
+}
+
+private fun needsUpdate(d1: Dosage, d2: Dosage): Boolean {
+    return d1.hour != d2.hour || d1.minute != d2.minute
 }
 
 private fun setAlarm(alarmManager: AlarmManager, context: Context, dosage: Dosage) {
     val intent = getIntent(context, dosage)
     val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
-    Log.d("alarm", "set alarm: ${dosage.id}")
+    Log.d("Alarm", "setting alarm: ${dosage.id}")
     alarmManager.setRepeating(
         RTC_WAKEUP,
         getAlarmTime(dosage),
@@ -45,7 +69,7 @@ private fun cancelAlarm(alarmManager: AlarmManager, context: Context, dosage: Do
     val intent = getIntent(context, dosage)
     val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, FLAG_NO_CREATE)
     if (pendingIntent != null) {
-        Log.d("alarm", "cancel alarm: ${dosage.id}")
+        Log.d("Alarm", "cancelling alarm: ${dosage.id}")
         alarmManager.cancel(pendingIntent)
     }
 }
@@ -62,13 +86,5 @@ private fun getIntent(context: Context, dosage: Dosage): Intent {
     val intent = Intent(context, AlarmReceiver::class.java)
     intent.data = Uri.parse("pilldroid://dosages/${dosage.id}")
     return intent
-}
-
-private fun forEachDose(action: (Dosage) -> Unit) {
-    medList.forEach { medication ->
-        medication.dosages.forEach { dosage ->
-            action(dosage)
-        }
-    }
 }
 

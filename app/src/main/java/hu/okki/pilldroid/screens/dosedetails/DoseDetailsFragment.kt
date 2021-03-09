@@ -12,6 +12,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import hu.okki.pilldroid.R
+import hu.okki.pilldroid.data.getDoseById
+import hu.okki.pilldroid.data.medList
 import hu.okki.pilldroid.databinding.FragmentDoseDetailsBinding
 
 class DoseDetailsFragment : Fragment() {
@@ -31,7 +33,7 @@ class DoseDetailsFragment : Fragment() {
             false
         )
         viewModel = ViewModelProvider(this).get(DoseDetailsViewModel::class.java)
-        viewModel.dose = args.dose
+        viewModel.dose = getDoseById(args.doseId)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
         bindTimePicker(binding.root)

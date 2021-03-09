@@ -27,7 +27,7 @@ class MedItemRecyclerAdapter
             binding.medication = item
             binding.executePendingBindings()
             itemView.setOnClickListener {
-                val action = MedListFragmentDirections.actionMedListFragmentToMedDetails(item)
+                val action = MedListFragmentDirections.actionMedListFragmentToMedDetails(item.id)
                 itemView.findNavController().navigate(action)
             }
         }

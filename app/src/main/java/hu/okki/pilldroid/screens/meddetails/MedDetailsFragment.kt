@@ -12,6 +12,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import hu.okki.pilldroid.R
+import hu.okki.pilldroid.data.getMedById
 import hu.okki.pilldroid.data.medList
 import hu.okki.pilldroid.databinding.FragmentMedDetailsBinding
 import hu.okki.pilldroid.screens.doselist.DoseItemRecyclerAdapter
@@ -26,14 +27,14 @@ class MedDetailsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding = DataBindingUtil.inflate<FragmentMedDetailsBinding>(
             inflater,
             R.layout.fragment_med_details,
             container,
             false)
         viewModel = ViewModelProvider(this).get(MedDetailsViewModel::class.java)
-        viewModel.medication = args.medication
+        viewModel.medication = getMedById(args.medicationId)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         bindList(binding.root)
@@ -52,7 +53,7 @@ class MedDetailsFragment : Fragment() {
         val button = view.findViewById<FloatingActionButton>(R.id.addDosageButton)
         button.setOnClickListener {
             val dosage = viewModel.addDosage()
-            val action = MedDetailsFragmentDirections.actionMedDetailsFragmentToDoseDetailsFragment(dosage)
+            val action = MedDetailsFragmentDirections.actionMedDetailsFragmentToDoseDetailsFragment(dosage.id)
             findNavController().navigate(action)
         }
     }

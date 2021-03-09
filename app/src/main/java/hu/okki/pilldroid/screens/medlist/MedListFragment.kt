@@ -22,7 +22,7 @@ class MedListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         viewModel = ViewModelProvider(this).get(MedListViewModel::class.java)
         val binding = DataBindingUtil.inflate<FragmentMedListBinding>(
             inflater, R.layout.fragment_med_list, container, false
@@ -44,8 +44,8 @@ class MedListFragment : Fragment() {
     private fun bindNewButton(v: View) {
         val newButton = v.findViewById<FloatingActionButton>(R.id.newMedicationButton)
         newButton.setOnClickListener {
-            val medication = viewModel.addMedication()
-            val action = MedListFragmentDirections.actionMedListFragmentToMedDetails(medication)
+            val medication = viewModel.newMedication()
+            val action = MedListFragmentDirections.actionMedListFragmentToMedDetails(medication.id)
             findNavController().navigate(action)
         }
     }
