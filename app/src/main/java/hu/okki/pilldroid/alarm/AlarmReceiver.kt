@@ -11,7 +11,6 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationCompat.PRIORITY_HIGH
 import hu.okki.pilldroid.R
 import hu.okki.pilldroid.data.getMedDataByDoseId
-import java.util.*
 
 const val NOTIFICATION_CHANNEL_ID = "pilldroid-notification"
 const val NOTIFICATION_NAME = "PillDroid Reminder"
@@ -28,7 +27,7 @@ class AlarmReceiver : BroadcastReceiver() {
             val builder = NotificationCompat.Builder(it, NOTIFICATION_CHANNEL_ID).apply {
                 setContentTitle(context.getString(R.string.pill_reminder))
                 setContentText(getNotificationContent(context, dosageId))
-                setSmallIcon(R.drawable.pie_chart_outline_24px)
+                setSmallIcon(R.drawable.medication_24px)
                 priority = PRIORITY_HIGH
             }
             val notificationService =
@@ -51,7 +50,7 @@ class AlarmReceiver : BroadcastReceiver() {
             enableLights(true)
             lightColor = Color.RED
             enableVibration(true)
-            description = "Test Notification"
+            description = "PillDroid Notification"
         }
         notificationManager.createNotificationChannel(channel)
     }

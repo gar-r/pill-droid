@@ -12,6 +12,7 @@ import android.net.Uri
 import android.util.Log
 import hu.okki.pilldroid.data.medList
 import hu.okki.pilldroid.model.Dosage
+import java.lang.Integer.parseInt
 import java.util.*
 
 fun setAlarms(context: Context) {
@@ -35,7 +36,7 @@ private fun setAlarm(alarmManager: AlarmManager, context: Context, dosage: Dosag
     alarmManager.setRepeating(
         RTC_WAKEUP,
         getAlarmTime(dosage),
-        INTERVAL_DAY,
+         parseInt(dosage.frequency) * INTERVAL_DAY,
         pendingIntent
     )
 }
