@@ -23,4 +23,10 @@
     <string name="cancel">Cancel</string>
     <string name="pill_reminder">Pill Reminder</string>
     <string name="notification_template">Take %s of %s</string>
+    <string name="action_help">Help</string>
+    <string name="app_url_help" translatable="false">https://github.com/garricasaurus/pill-droid</string>
+    <string name="licence_p1" translatable="false">PillDroid - an app for Android to remind the user when and what medication to take Copyright (C) 2021  Richard Garai</string>
+    <string name="licence_p2" translatable="false">"This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. "</string>
+    <string name="licence_p3" translatable="false">"This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details. "</string>
+    <string name="licence_p4" translatable="false">"You should have received a copy of the GNU General Public License along with this program.  If not, see https://www.gnu.org/licenses/. "</string>
 </resources>

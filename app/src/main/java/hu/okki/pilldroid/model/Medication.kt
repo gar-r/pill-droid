@@ -5,13 +5,13 @@ import java.util.*
 
 @kotlinx.serialization.Serializable
 data class Medication(
-    var id: String,
+    var id: Int,
     var name: String,
     val dosages: MutableList<Dosage>
 ) : Serializable {
 
-    constructor(name: String) : this(
-        UUID.randomUUID().toString(),
+    constructor(id: Int, name: String) : this(
+        id,
         name,
         mutableListOf()
     )

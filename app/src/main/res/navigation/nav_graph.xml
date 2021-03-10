@@ -23,7 +23,7 @@
         android:name="hu.okki.pilldroid.screens.meddetails.MedDetailsFragment"
         android:label="@string/title_med_details"
         tools:layout="@layout/fragment_med_details" >
-        <argument android:name="medicationId" />
+        <argument android:name="medicationId" app:argType="integer" />
         <action
             android:id="@+id/action_medDetailsFragment_to_doseDetailsFragment"
             app:destination="@id/doseDetailsFragment" />
@@ -32,7 +32,7 @@
         android:id="@+id/doseDetailsFragment"
         android:name="hu.okki.pilldroid.screens.dosedetails.DoseDetailsFragment"
         android:label="@string/title_edit_dose" >
-        <argument android:name="doseId"  />
+        <argument android:name="doseId" app:argType="integer" />
     </fragment>
 
 </navigation>

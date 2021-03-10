@@ -22,11 +22,12 @@ const val NOTIFICATION_NAME = "PillDroid Reminder"
 
 class AlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
-        val dosageId = intent?.data?.lastPathSegment.toString()
+        val idStr = intent!!.data!!.lastPathSegment!!
+        val dosageId = Integer.parseInt(idStr)
         sendNotification(context, dosageId)
     }
 
-    private fun sendNotification(context: Context?, dosageId: String) {
+    private fun sendNotification(context: Context?, dosageId: Int) {
         val medData = getMedDataByDoseId(dosageId)
         if (medData == null || context == null)
             return
@@ -41,7 +42,7 @@ class AlarmReceiver : BroadcastReceiver() {
         }
         val notificationService =
             context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-        notificationService.notify(1, builder.build())
+        notificationService.notify(medData.second.id, builder.build())
     }
 
     private fun getTapIntent(context: Context): PendingIntent? {

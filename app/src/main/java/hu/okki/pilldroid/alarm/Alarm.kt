@@ -56,7 +56,7 @@ private fun needsUpdate(d1: Dosage, d2: Dosage): Boolean {
 private fun setAlarm(alarmManager: AlarmManager, context: Context, dosage: Dosage) {
     val intent = getIntent(context, dosage)
     val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
-    Log.d("Alarm", "setting alarm: ${dosage.id}")
+    Log.d("Alarm", "setting alarm: $dosage")
     alarmManager.setRepeating(
         RTC_WAKEUP,
         getAlarmTime(dosage),
@@ -69,7 +69,7 @@ private fun cancelAlarm(alarmManager: AlarmManager, context: Context, dosage: Do
     val intent = getIntent(context, dosage)
     val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, FLAG_NO_CREATE)
     if (pendingIntent != null) {
-        Log.d("Alarm", "cancelling alarm: ${dosage.id}")
+        Log.d("Alarm", "cancelling alarm: $dosage")
         alarmManager.cancel(pendingIntent)
     }
 }

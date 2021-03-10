@@ -1,9 +1,7 @@
 package hu.okki.pilldroid.screens.medlist
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -43,11 +41,32 @@ class MedListFragment : Fragment() {
 
     private fun bindNewButton(v: View) {
         val newButton = v.findViewById<FloatingActionButton>(R.id.newMedicationButton)
-        newButton.setOnClickListener {
-            val medication = viewModel.newMedication()
-            val action = MedListFragmentDirections.actionMedListFragmentToMedDetails(medication.id)
-            findNavController().navigate(action)
-        }
+        newButton.setOnClickListener { addNewMedication() }
     }
 
+    private fun addNewMedication() {
+        val medication = viewModel.addMedication()
+        val action = MedListFragmentDirections.actionMedListFragmentToMedDetails(medication.id)
+        findNavController().navigate(action)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_add, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_add -> {
+                addNewMedication()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 }

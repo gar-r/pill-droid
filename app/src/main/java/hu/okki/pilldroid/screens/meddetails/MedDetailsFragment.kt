@@ -1,7 +1,6 @@
 package hu.okki.pilldroid.screens.meddetails
 
 import android.app.AlertDialog
-import android.content.DialogInterface
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.*
@@ -13,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import hu.okki.pilldroid.R
 import hu.okki.pilldroid.data.getMedById
-import hu.okki.pilldroid.data.medList
 import hu.okki.pilldroid.databinding.FragmentMedDetailsBinding
 import hu.okki.pilldroid.screens.doselist.DoseItemRecyclerAdapter
 
@@ -51,11 +49,14 @@ class MedDetailsFragment : Fragment() {
 
     private fun bindAddButton(view: View) {
         val button = view.findViewById<FloatingActionButton>(R.id.addDosageButton)
-        button.setOnClickListener {
-            val dosage = viewModel.addDosage()
-            val action = MedDetailsFragmentDirections.actionMedDetailsFragmentToDoseDetailsFragment(dosage.id)
-            findNavController().navigate(action)
-        }
+        button.setOnClickListener { addNewDosage() }
+    }
+
+    private fun addNewDosage() {
+        val dosage = viewModel.addDosage()
+        val action =
+            MedDetailsFragmentDirections.actionMedDetailsFragmentToDoseDetailsFragment(dosage.id)
+        findNavController().navigate(action)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,10 +67,15 @@ class MedDetailsFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_details, menu)
+        inflater.inflate(R.menu.menu_add, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
-        R.id.menu_delete -> {
+        R.id.action_add -> {
+            addNewDosage()
+            true
+        }
+        R.id.action_delete -> {
             val builder = AlertDialog.Builder(context)
                 .setMessage("\"${viewModel.medication.name}\" ${getString(R.string.will_be_deleted)}")
                 .setTitle(getString(R.string.please_confirm))

@@ -3,17 +3,14 @@ package hu.okki.pilldroid.screens.dosedetails
 import android.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
-import android.widget.EditText
 import android.widget.TimePicker
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import hu.okki.pilldroid.R
 import hu.okki.pilldroid.data.getDoseById
-import hu.okki.pilldroid.data.medList
 import hu.okki.pilldroid.databinding.FragmentDoseDetailsBinding
 
 class DoseDetailsFragment : Fragment() {
@@ -62,7 +59,7 @@ class DoseDetailsFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
-        R.id.menu_delete -> {
+        R.id.action_delete -> {
             context?.let {
                 val builder = AlertDialog.Builder(it)
                     .setMessage("\"${viewModel.dose.toPrettyString(it)}\" ${getString(R.string.will_be_deleted)}")

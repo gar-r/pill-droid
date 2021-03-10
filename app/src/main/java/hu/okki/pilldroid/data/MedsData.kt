@@ -8,15 +8,30 @@ var medList = mutableListOf<Medication>()
 
 var medListOld = mutableListOf<Medication>()
 
-fun getMedById(id: String): Medication {
+fun nextMedId(): Int {
+    if (medList.isEmpty()) {
+        return 0
+    }
+    return medList.maxOf { m -> m.id } + 1
+}
+
+fun nextDoseId(): Int {
+    val dosages = medList.flatMap { m -> m.dosages }
+    if (dosages.isEmpty()) {
+        return 0
+    }
+    return dosages.maxOf { d -> d.id } + 1
+}
+
+fun getMedById(id: Int): Medication {
     return medList.single { med -> med.id == id }
 }
 
-fun getDoseById(id: String): Dosage {
+fun getDoseById(id: Int): Dosage {
     return medList.flatMap { med -> med.dosages }.single { d -> d.id == id }
 }
 
-fun getMedDataByDoseId(id: String): Pair<Medication, Dosage>? {
+fun getMedDataByDoseId(id: Int): Pair<Medication, Dosage>? {
     medList.forEach { med ->
         med.dosages.forEach { dose ->
             if (dose.id == id) {

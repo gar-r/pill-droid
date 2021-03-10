@@ -23,4 +23,5 @@
     <string name="notification_template">%s %s bevétele</string>
     <string name="day">nap</string>
     <string name="at">ekkor:</string>
+    <string name="action_help">Súgó</string>
 </resources>

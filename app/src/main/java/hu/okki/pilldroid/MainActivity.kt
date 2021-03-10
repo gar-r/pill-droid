@@ -1,5 +1,7 @@
 package hu.okki.pilldroid
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -42,6 +44,12 @@ class MainActivity : AppCompatActivity() {
             R.id.action_about -> {
                 val navController = findNavController(R.id.nav_host_fragment)
                 navController.navigate(R.id.aboutFragment)
+                return true
+            }
+            R.id.action_help -> {
+                val helpUrl = Uri.parse(getString(R.string.app_url_help))
+                val navIntent = Intent(Intent.ACTION_VIEW, helpUrl)
+                startActivity(navIntent)
                 return true
             }
             else -> super.onOptionsItemSelected(item)
