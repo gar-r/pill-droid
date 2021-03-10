@@ -17,7 +17,6 @@ fun saveMedList(filesDir: File) {
     f.delete()
     f.createNewFile()
     f.writeText(json.encodeToString(medList))
-    Log.d("Persistence", "data saved: $medList")
 }
 
 fun loadMedList(filesDir: File) {
@@ -28,7 +27,6 @@ fun loadMedList(filesDir: File) {
     val jsonStr = f.readText()
     decode(jsonStr, medList)
     decode(jsonStr, medListOld)
-    Log.d("Persistence", "data loaded: $jsonStr")
 }
 
 private fun decode(jsonStr: String, list: MutableList<Medication>) {
