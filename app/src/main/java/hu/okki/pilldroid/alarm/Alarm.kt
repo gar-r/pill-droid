@@ -42,6 +42,11 @@ fun updateAlarms(context: Context) {
     }
 }
 
+fun reschedule(context: Context, dosage: Dosage) {
+    val alarmManager = context.getSystemService(ALARM_SERVICE) as AlarmManager
+    setAlarm(alarmManager, context, dosage)
+}
+
 private fun findById(list: List<Dosage>, dosage: Dosage): Dosage? {
     return list.firstOrNull { d -> dosage.id == d.id }
 }
@@ -53,10 +58,9 @@ private fun needsUpdate(d1: Dosage, d2: Dosage): Boolean {
 private fun setAlarm(alarmManager: AlarmManager, context: Context, dosage: Dosage) {
     val intent = getIntent(context, dosage)
     val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
-    alarmManager.setRepeating(
+    alarmManager.setExactAndAllowWhileIdle(
         RTC_WAKEUP,
         getAlarmTime(dosage),
-         parseInt(dosage.frequency) * INTERVAL_DAY,
         pendingIntent
     )
 }
@@ -70,11 +74,21 @@ private fun cancelAlarm(alarmManager: AlarmManager, context: Context, dosage: Do
 }
 
 private fun getAlarmTime(dosage: Dosage): Long {
-    val cal = Calendar.getInstance().apply {
+    Calendar.getInstance().apply {
         set(Calendar.HOUR_OF_DAY, dosage.hour)
         set(Calendar.MINUTE, dosage.minute)
+        set(Calendar.SECOND, 0)
+        if (isElapsed(this)) {
+            add(Calendar.DAY_OF_MONTH, 1)
+        }
+        return timeInMillis
     }
-    return cal.timeInMillis
+}
+
+private fun isElapsed(calendar: Calendar): Boolean {
+    Calendar.getInstance().apply {
+        return calendar.before(this)
+    }
 }
 
 private fun getIntent(context: Context, dosage: Dosage): Intent {

@@ -13,6 +13,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationCompat.PRIORITY_HIGH
 import hu.okki.pilldroid.MainActivity
 import hu.okki.pilldroid.R
+import hu.okki.pilldroid.data.getDoseById
 import hu.okki.pilldroid.data.getMedDataByDoseId
 import hu.okki.pilldroid.model.Dosage
 import hu.okki.pilldroid.model.Medication
@@ -22,15 +23,16 @@ const val NOTIFICATION_NAME = "PillDroid Reminder"
 
 class AlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
-        val idStr = intent!!.data!!.lastPathSegment!!
-        val dosageId = Integer.parseInt(idStr)
-        sendNotification(context, dosageId)
+        context?.run {
+            val idStr = intent!!.data!!.lastPathSegment!!
+            val dosageId = Integer.parseInt(idStr)
+            sendNotification(context, dosageId)
+            reschedule(context, getDoseById(dosageId))
+        }
     }
 
-    private fun sendNotification(context: Context?, dosageId: Int) {
-        val medData = getMedDataByDoseId(dosageId)
-        if (medData == null || context == null)
-            return
+    private fun sendNotification(context: Context, dosageId: Int) {
+        val medData = getMedDataByDoseId(dosageId) ?: return
 
         createNotificationChannel(context)
         val builder = NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID).apply {
