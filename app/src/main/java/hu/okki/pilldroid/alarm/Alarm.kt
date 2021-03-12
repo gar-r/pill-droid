@@ -4,16 +4,13 @@ import android.app.AlarmManager
 import android.app.AlarmManager.RTC_WAKEUP
 import android.app.PendingIntent
 import android.app.PendingIntent.FLAG_NO_CREATE
-import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.content.Context
 import android.content.Context.ALARM_SERVICE
 import android.content.Intent
 import android.net.Uri
-import android.util.Log
 import hu.okki.pilldroid.data.medList
 import hu.okki.pilldroid.data.medListOld
 import hu.okki.pilldroid.model.Dosage
-import kotlinx.coroutines.awaitAll
 import java.util.*
 
 fun updateAlarms(context: Context) {
@@ -21,7 +18,16 @@ fun updateAlarms(context: Context) {
     val new = medList.flatMap { it.dosages }
     val old = medListOld.flatMap { it.dosages }
     old.filter { findById(new, it) == null }.forEach { cancelAlarm(alarmManager, context, it) }
-    new.forEach { setAlarm(alarmManager, context, it) }
+    new.forEach {
+        val previous = findById(old, it)
+        if (previous == null) {
+            setAlarm(alarmManager, context, it)
+        }
+        else if (needsUpdate(previous, it)) {
+            cancelAlarm(alarmManager, context, it)
+            setAlarm(alarmManager, context, it)
+        }
+    }
 }
 
 fun reschedule(context: Context, dosage: Dosage) {
@@ -69,6 +75,10 @@ private fun isElapsed(calendar: Calendar): Boolean {
     Calendar.getInstance().apply {
         return calendar.before(this)
     }
+}
+
+private fun needsUpdate(d1: Dosage, d2: Dosage): Boolean {
+    return d1.hour != d2.hour || d1.minute != d2.minute
 }
 
 private fun findById(list: List<Dosage>, dosage: Dosage): Dosage? {
