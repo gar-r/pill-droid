@@ -53,10 +53,12 @@ class MedDetailsFragment : Fragment() {
     }
 
     private fun addNewDosage() {
-        val dosage = viewModel.addDosage()
-        val action =
-            MedDetailsFragmentDirections.actionMedDetailsFragmentToDoseDetailsFragment(dosage.id)
-        findNavController().navigate(action)
+        context?.let {
+            val dosage = viewModel.addDosage(it)
+            val action =
+                MedDetailsFragmentDirections.actionMedDetailsFragmentToDoseDetailsFragment(dosage.id)
+            findNavController().navigate(action)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

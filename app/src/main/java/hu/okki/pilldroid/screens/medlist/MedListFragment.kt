@@ -45,9 +45,11 @@ class MedListFragment : Fragment() {
     }
 
     private fun addNewMedication() {
-        val medication = viewModel.addMedication()
-        val action = MedListFragmentDirections.actionMedListFragmentToMedDetails(medication.id)
-        findNavController().navigate(action)
+        context?.let {
+            val medication = viewModel.addMedication(it)
+            val action = MedListFragmentDirections.actionMedListFragmentToMedDetails(medication.id)
+            findNavController().navigate(action)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

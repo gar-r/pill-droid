@@ -24,4 +24,6 @@
     <string name="day">nap</string>
     <string name="at">ekkor:</string>
     <string name="action_help">Súgó</string>
+    <string name="new_medication">Gyógyszer</string>
+    <string name="one_pill">1 tabletta</string>
 </resources>
