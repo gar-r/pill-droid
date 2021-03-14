@@ -35,6 +35,6 @@ private fun freqFormatted(context: Context, frequency: String): String {
     }
 }
 
-private fun getString(context: Context, id: Int) =
+fun getString(context: Context, id: Int) =
     context.resources.getString(id)
 

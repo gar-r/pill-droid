@@ -17,8 +17,8 @@ class MedicationRepository(private val medicationData: MedicationData) {
         return medications
     }
 
-    fun newMedication(): Medication {
-        val medication = Medication("New Medication")
+    fun newMedication(name: String): Medication {
+        val medication = Medication(name)
         medications.add(medication)
         return medication
     }
@@ -31,12 +31,12 @@ class MedicationRepository(private val medicationData: MedicationData) {
         medications.remove(medication)
     }
 
-    fun newDosage(medication: Medication): Dosage {
+    fun newDosage(parent: Medication, frequency: String, amount: String): Dosage {
         with(Calendar.getInstance()) {
             val hour = get(Calendar.HOUR_OF_DAY)
             val minute = get(Calendar.MINUTE)
-            val dosage = Dosage("1", hour, minute, "1 pill")
-            medication.addDosage(dosage)
+            val dosage = Dosage(frequency, hour, minute, amount)
+            parent.addDosage(dosage)
             return dosage
         }
     }
