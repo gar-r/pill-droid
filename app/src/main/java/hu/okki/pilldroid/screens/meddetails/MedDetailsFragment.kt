@@ -11,8 +11,8 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import hu.okki.pilldroid.R
-import hu.okki.pilldroid.data.getMedById
 import hu.okki.pilldroid.databinding.FragmentMedDetailsBinding
+import hu.okki.pilldroid.medicationRepository
 import hu.okki.pilldroid.screens.doselist.DoseItemRecyclerAdapter
 
 class MedDetailsFragment : Fragment() {
@@ -32,7 +32,7 @@ class MedDetailsFragment : Fragment() {
             container,
             false)
         viewModel = ViewModelProvider(this).get(MedDetailsViewModel::class.java)
-        viewModel.medication = getMedById(args.medicationId)
+        viewModel.medication = medicationRepository.getMedicationById(args.medicationId)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         bindList(binding.root)
@@ -82,7 +82,7 @@ class MedDetailsFragment : Fragment() {
                 .setMessage("\"${viewModel.medication.name}\" ${getString(R.string.will_be_deleted)}")
                 .setTitle(getString(R.string.please_confirm))
                 .setPositiveButton(getString(R.string.delete)) { _, _ ->
-                    viewModel.deleteMedication()
+                    viewModel.delete()
                     findNavController().popBackStack()
                 }
                 .setNegativeButton(getString(R.string.cancel)) { _, _ -> run {} }

@@ -3,6 +3,7 @@ package hu.okki.pilldroid.screens.medlist
 import android.os.Bundle
 import android.view.*
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.ObservableList
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -10,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import hu.okki.pilldroid.R
 import hu.okki.pilldroid.databinding.FragmentMedListBinding
+import hu.okki.pilldroid.medicationRepository
+import hu.okki.pilldroid.model.Medication
 
 
 class MedListFragment : Fragment() {
@@ -22,6 +25,7 @@ class MedListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         viewModel = ViewModelProvider(this).get(MedListViewModel::class.java)
+        viewModel.medList = medicationRepository.getAll()
         val binding = DataBindingUtil.inflate<FragmentMedListBinding>(
             inflater, R.layout.fragment_med_list, container, false
         )

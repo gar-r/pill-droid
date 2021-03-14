@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".alarm.AlarmReceiver" />
+        <receiver android:name="hu.okki.pilldroid.alarm.AlarmReceiver" android:enabled="true" />
 
     </application>
 

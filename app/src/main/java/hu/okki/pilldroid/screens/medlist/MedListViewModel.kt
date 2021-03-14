@@ -1,19 +1,17 @@
 package hu.okki.pilldroid.screens.medlist
 
-import android.content.Context
+import androidx.databinding.ObservableList
 import androidx.lifecycle.ViewModel
-import hu.okki.pilldroid.R
-import hu.okki.pilldroid.data.nextMedId
+import hu.okki.pilldroid.medicationRepository
 import hu.okki.pilldroid.model.Medication
+import hu.okki.pilldroid.repository.MedicationRepository
 
 class MedListViewModel : ViewModel() {
 
-    var medList = hu.okki.pilldroid.data.medList
+    lateinit var medList: List<Medication>
 
-    fun addMedication(context: Context): Medication {
-        val medication = Medication(nextMedId(), context.getString(R.string.new_medication))
-        medList.add(medication)
-        return medication
+    fun addMedication(): Medication {
+        return medicationRepository.newMedication()
     }
 
 }

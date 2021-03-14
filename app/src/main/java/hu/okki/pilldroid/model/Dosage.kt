@@ -1,39 +1,45 @@
 package hu.okki.pilldroid.model
 
-import android.content.Context
-import hu.okki.pilldroid.R
 import java.io.Serializable
 import java.util.*
 
 @kotlinx.serialization.Serializable
 data class Dosage(
-    var id: Int,
+    var id: String,
     var frequency: String,
     var hour: Int,
     var minute: Int,
     var amount: String
 ) : Serializable {
 
-    fun toPrettyString(context: Context): String {
-        return "$amount ${getString(context, R.string.at)} ${formatTime(hour)}:${formatTime(minute)}, ${freqFormatted(context)}"
-    }
+    constructor(frequency: String, hour: Int, minute: Int, amount: String)
+            : this(UUID.randomUUID().toString(), frequency, hour, minute, amount)
 
-    private fun freqFormatted(context: Context): String {
-        return when (frequency) {
-            "1" -> "${getString(context, R.string.every)} ${getString(context, R.string.day)}"
-            else -> "${getString(context, R.string.every)} $frequency ${getString(context, R.string.days)}"
-        }
-    }
-
-    private fun formatTime(t: Int): String {
+    fun getNextEvent(): Calendar {
+        val cal = toCalendar()
+        val now = Calendar.getInstance()
         return when {
-            t < 10 -> "0$t"
-            else -> t.toString()
+            now.before(cal) -> cal
+            else -> cal.apply {
+                cal.add(Calendar.DATE, Integer.parseInt(frequency))
+            }
         }
     }
 
-    private fun getString(context: Context, id: Int) =
-        context.resources.getString(id)
+    fun toCalendar(): Calendar {
+        return Calendar.getInstance().apply {
+            set(Calendar.HOUR_OF_DAY, hour)
+            set(Calendar.MINUTE, minute)
+            set(Calendar.SECOND, 0)
+        }
+    }
+
+
+
+
+
+
+
 
 
 }

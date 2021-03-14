@@ -9,9 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
-import hu.okki.pilldroid.alarm.updateAlarms
-import hu.okki.pilldroid.data.loadMedList
-import hu.okki.pilldroid.data.saveMedList
+import hu.okki.pilldroid.alarm.scheduleNextAlarm
+import hu.okki.pilldroid.repository.*
+
+lateinit var medicationRepository: MedicationRepository
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,17 +22,18 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
         val navController = findNavController(R.id.nav_host_fragment)
         setupActionBarWithNavController(navController, AppBarConfiguration(navController.graph))
+        medicationRepository = MedicationRepository(JsonFileMedicationData(filesDir))
     }
 
     override fun onResume() {
         super.onResume()
-        loadMedList(filesDir)
+        medicationRepository = MedicationRepository(JsonFileMedicationData(filesDir))
     }
 
     override fun onPause() {
         super.onPause()
-        saveMedList(filesDir)
-        updateAlarms(this)
+        medicationRepository.saveAll()
+        scheduleNextAlarm(applicationContext)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
