@@ -14,7 +14,7 @@ Actually it's very simple. You can add your medications to the app, and PillDroi
 
 When you open the app for the first time, it will show the _Medication List_ screen, and initially it will be empty.
 
-![medication list](./screenshots/ss_medlist_init.png)
+![medication list](./screenshots/ss_medlist_init_sm.png)
 
 You can add a new medication with either the floating action button in the bottom right corner, or tapping the `+` sign in the toolbar.
 
@@ -25,7 +25,7 @@ While there is no restriction on what you can put in here, it works best if you 
    * Lithium
    * Algopyrin
 
-![medication details](./screenshots/ss_med_details.png)
+![medication details](./screenshots/ss_med_details_sm.png)
 
 ### Adding a Dosage to the Medication
 
@@ -38,7 +38,7 @@ The next screen is about telling PillDroid when, and how much of the medication 
    * __frequency__: this indicates how often the alarm will repeat. The default is _daily_, but you can change it to be less frequent if you wish.
    * __alarm time__: the hour and minute of the alarm
 
-![dosage details](/./screenshots/ss_dose_details.png)
+![dosage details](/./screenshots/ss_dose_details_sm.png)
 
 #### Tip:
 
@@ -52,7 +52,7 @@ For example:
 
 from the same medicine, every day would look like the below screenshot.
 
-![dosage details multiple](screenshots/ss_dose_details_filled.png)
+![dosage details multiple](screenshots/ss_dose_details_filled_sm.png)
 
 ### Editing medications/dosages
 
@@ -60,7 +60,7 @@ To edit a medication, locate it in the _Medication List_ screen, and tap its nam
 
 To change the associated dosages, click on a dosage in the list, and change it on the next screen.
 
-![medication list multiple](./screenshots/ss_medlist_filled.png)
+![medication list multiple](./screenshots/ss_medlist_filled_sm.png)
 
 ### Delete a medication
 
@@ -87,7 +87,7 @@ Alarms however are not primed, until you close the app or put in the background.
 
 When you receive the notifications for the medications, it should look like this:
 
-![alarms](./screenshots/ss_notification.png)
+![alarms](./screenshots/ss_notification_sm.png)
 
 ## FAQ
 
