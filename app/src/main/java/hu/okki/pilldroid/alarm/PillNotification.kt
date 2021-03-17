@@ -3,8 +3,8 @@ package hu.okki.pilldroid.alarm
 import android.app.NotificationManager
 import android.content.Context
 import hu.okki.pilldroid.R
-import hu.okki.pilldroid.medicationRepository
 import hu.okki.pilldroid.model.Dosage
+import hu.okki.pilldroid.repository.MedicationRepository
 
 
 class PillNotification(private val dosage: Dosage) {
@@ -19,7 +19,7 @@ class PillNotification(private val dosage: Dosage) {
     }
 
     private fun getContent(context: Context, dosage: Dosage): String {
-        val medication = medicationRepository.getParent(dosage)
+        val medication = MedicationRepository.getInstance(context).getParent(dosage)
         val template = context.getString(R.string.notification_template)
         return String.format(template, dosage.amount, medication.name)
     }

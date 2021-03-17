@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import hu.okki.pilldroid.R
 import hu.okki.pilldroid.databinding.FragmentMedDetailsBinding
-import hu.okki.pilldroid.medicationRepository
+import hu.okki.pilldroid.repository.MedicationRepository
 import hu.okki.pilldroid.screens.doselist.DoseItemRecyclerAdapter
 
 class MedDetailsFragment : Fragment() {
@@ -32,7 +32,7 @@ class MedDetailsFragment : Fragment() {
             container,
             false)
         viewModel = ViewModelProvider(this).get(MedDetailsViewModel::class.java)
-        viewModel.medication = medicationRepository.getMedicationById(args.medicationId)
+        viewModel.medication = MedicationRepository.getInstance(requireContext()).getMedicationById(args.medicationId)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         bindList(binding.root)
@@ -52,15 +52,6 @@ class MedDetailsFragment : Fragment() {
         button.setOnClickListener { addNewDosage() }
     }
 
-    private fun addNewDosage() {
-        context?.let {
-            val dosage = viewModel.addDosage(it)
-            val action =
-                MedDetailsFragmentDirections.actionMedDetailsFragmentToDoseDetailsFragment(dosage.id)
-            findNavController().navigate(action)
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -78,17 +69,30 @@ class MedDetailsFragment : Fragment() {
             true
         }
         R.id.action_delete -> {
-            val builder = AlertDialog.Builder(context)
-                .setMessage("\"${viewModel.medication.name}\" ${getString(R.string.will_be_deleted)}")
-                .setTitle(getString(R.string.please_confirm))
-                .setPositiveButton(getString(R.string.delete)) { _, _ ->
-                    viewModel.delete()
-                    findNavController().popBackStack()
-                }
-                .setNegativeButton(getString(R.string.cancel)) { _, _ -> run {} }
-            builder.create().show()
+            deleteDosage()
             true
         }
         else -> super.onOptionsItemSelected(item)
+    }
+
+    private fun addNewDosage() {
+        context?.let {
+            val dosage = viewModel.addDosage(it)
+            val action =
+                MedDetailsFragmentDirections.actionMedDetailsFragmentToDoseDetailsFragment(dosage.id)
+            findNavController().navigate(action)
+        }
+    }
+
+    private fun deleteDosage() {
+        val builder = AlertDialog.Builder(context)
+            .setMessage("\"${viewModel.medication.name}\" ${getString(R.string.will_be_deleted)}")
+            .setTitle(getString(R.string.please_confirm))
+            .setPositiveButton(getString(R.string.delete)) { _, _ ->
+                viewModel.delete(requireContext())
+                findNavController().popBackStack()
+            }
+            .setNegativeButton(getString(R.string.cancel)) { _, _ -> run {} }
+        builder.create().show()
     }
 }

@@ -12,8 +12,6 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import hu.okki.pilldroid.alarm.scheduleNextAlarm
 import hu.okki.pilldroid.repository.*
 
-lateinit var medicationRepository: MedicationRepository
-
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,17 +20,11 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
         val navController = findNavController(R.id.nav_host_fragment)
         setupActionBarWithNavController(navController, AppBarConfiguration(navController.graph))
-        medicationRepository = MedicationRepository(JsonFileMedicationData(filesDir))
-    }
-
-    override fun onResume() {
-        super.onResume()
-        medicationRepository = MedicationRepository(JsonFileMedicationData(filesDir))
     }
 
     override fun onPause() {
         super.onPause()
-        medicationRepository.saveAll()
+        MedicationRepository.getInstance(applicationContext).saveAll()
         scheduleNextAlarm(applicationContext)
     }
 
