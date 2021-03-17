@@ -1,10 +1,11 @@
 package hu.okki.pilldroid.repository
 
+import android.content.Context
 import hu.okki.pilldroid.model.Dosage
 import hu.okki.pilldroid.model.Medication
 import java.util.*
 
-class MedicationRepository(private val medicationData: MedicationData) {
+class MedicationRepository private constructor(private val medicationData: MedicationData) {
 
     private val medications: MutableList<Medication> =
         medicationData.loadMedications().toMutableList()
@@ -69,4 +70,19 @@ class MedicationRepository(private val medicationData: MedicationData) {
                 .filter { it.minute == m }
         }
     }
+
+    companion object {
+
+        private var instance: MedicationRepository? = null
+
+        fun getInstance(context: Context): MedicationRepository {
+            if (instance == null) {
+                val medicationData = JsonFileMedicationData(context.filesDir)
+                instance = MedicationRepository(medicationData)
+            }
+            return instance as MedicationRepository
+        }
+
+    }
+
 }

@@ -12,7 +12,7 @@ import androidx.navigation.fragment.navArgs
 import hu.okki.pilldroid.R
 import hu.okki.pilldroid.databinding.FragmentDoseDetailsBinding
 import hu.okki.pilldroid.helper.toPrettyString
-import hu.okki.pilldroid.medicationRepository
+import hu.okki.pilldroid.repository.MedicationRepository
 
 class DoseDetailsFragment : Fragment() {
 
@@ -31,7 +31,7 @@ class DoseDetailsFragment : Fragment() {
             false
         )
         viewModel = ViewModelProvider(this).get(DoseDetailsViewModel::class.java)
-        viewModel.dose = medicationRepository.getDosageById(args.doseId)
+        viewModel.dose = MedicationRepository.getInstance(requireContext()).getDosageById(args.doseId)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
         bindTimePicker(binding.root)
