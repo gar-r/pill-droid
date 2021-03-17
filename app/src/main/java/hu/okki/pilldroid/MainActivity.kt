@@ -10,7 +10,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import hu.okki.pilldroid.alarm.scheduleNextAlarm
-import hu.okki.pilldroid.repository.*
+import hu.okki.pilldroid.alarm.scheduleWorker
+import hu.okki.pilldroid.repository.MedicationRepository
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         super.onPause()
         MedicationRepository.getInstance(applicationContext).saveAll()
         scheduleNextAlarm(applicationContext)
+        scheduleWorker(applicationContext)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
